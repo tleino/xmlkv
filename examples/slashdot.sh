@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for a in lynx curl nroff xmlq ; do
+for a in lynx curl nroff xmlkv ; do
 	which $a 2>/dev/null 1>/dev/null
 	if [ $? -ne 0 ] ; then
 		echo "$0: install $a or add to PATH"
@@ -17,12 +17,12 @@ fi
 if [ $1 ] ; then
 	while [ $1 ] ; do
 		cat slashdot.rss\
-			|xmlq -sq item/title$\
+			|xmlkv -sq item/title$\
 			|awk '{ print toupper($0) }'\
 			|sed -n "$1p"\
 			|fmt
 		cat slashdot.rss\
-			|xmlq -sq item/description$\
+			|xmlkv -sq item/description$\
 			|sed "s/^'//"\
 			|sed -n "$1p"\
 			|lynx -dump -stdin -nolist\
@@ -31,7 +31,7 @@ if [ $1 ] ; then
 	done
 else
 	cat slashdot.rss\
-		|xmlq -sq item/title$\
+		|xmlkv -sq item/title$\
 		|sed "s/^'//"\
 		|awk '{ print ".IP",NR; print }'\
 		|nroff -ms\

@@ -12,14 +12,14 @@ mandir = $(datarootdir)/man
 INSTALL ?= install
 INSTALLFLAGS ?=
 
-SRCS=xmlq.c \
+SRCS=xmlkv.c \
 	
 DISTFILES=\
 	Makefile.in\
 	configure\
 	README\
 	LICENSE
-PROG=xmlq
+PROG=xmlkv
 
 OBJS=$(SRCS:.c=.o)
 
