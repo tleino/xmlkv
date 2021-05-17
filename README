@@ -25,3 +25,14 @@ Usage
 e.g.
 
 ./xmlq -s <file.xml | grep /html/body/name
+
+Example
+=======
+
+examples/slashdot.sh is a proof of concept showing xmlq can be used
+to quickly write an RSS reader by combining standard line-based
+text-processing tools. It uses curl for getting the feed, xmlq and
+awk for parsing it, and lynx for formatting the output.
+
+Without arguments, it gives the list of articles.
+With a number argument, it gives the article.
