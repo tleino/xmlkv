@@ -1,10 +1,12 @@
 #!/bin/sh
 
-which lynx curl nroff xmlq 1>/dev/null
-if [ $? -ne 0 ] ; then
-	echo "$0: install the missing programs or add to PATH"
-	exit 1
-fi
+for a in lynx curl nroff xmlq ; do
+	which $a 2>/dev/null 1>/dev/null
+	if [ $? -ne 0 ] ; then
+		echo "$0: install $a or add to PATH"
+		exit 1
+	fi
+done
 
 if [ ! -e slashdot.rss ] ; then
 	curl \
