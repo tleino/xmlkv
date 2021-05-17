@@ -1,0 +1,27 @@
+xmlq
+====
+
+xmlq is a simple command-line tool for converting XML files to a simple
+key-value format, so that XML content can be easily processed with
+standard line-based Unix text-processing tools such as grep, sed, awk.
+
+Dependencies
+============
+
+A standard Unix-like base system with C compiler, development headers
+installed and pkg-config, plus:
+
+- libexpat
+
+Build & Install
+===============
+
+./configure ~
+make install
+
+Usage
+=====
+
+e.g.
+
+./xmlq -s <file.xml | grep /html/body/name
