@@ -36,3 +36,8 @@ awk for parsing it, and lynx and nroff for formatting the output.
 
 Without arguments, it gives the list of articles, formatted with nroff.
 With a number argument, it gives the article, formatted with lynx.
+
+See also
+========
+
+https://github.com/tleino/kvjson
