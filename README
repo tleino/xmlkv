@@ -11,7 +11,7 @@ Dependencies
 A standard Unix-like base system with C compiler, development headers
 installed and pkg-config, plus:
 
-- libexpat
+- libexpat (e.g. libexpat1-dev)
 
 Build & Install
 ===============
