@@ -139,8 +139,10 @@ main(int argc, char *argv[])
 {
 	int i, ch, cflags;
 
+#ifdef __OpenBSD__
 	if (pledge("stdio", NULL) < 0)
 		err(1, "pledge");
+#endif
 	while ((ch = getopt(argc, argv, "psqrh")) != -1) {
 		switch (ch) {
 		case 's':
@@ -158,7 +160,7 @@ main(int argc, char *argv[])
 		case 'h':
 		default:
 			fprintf(stderr, "Usage: %s [-psqr] [re ..]\n",
-			    getprogname());
+			    argv[0]);
 			fprintf(stderr,
 			    "\t-s\tsingle\n"
 			    "\t-q\tquiet\n"
