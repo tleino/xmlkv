@@ -25,6 +25,18 @@ prefix=/usr/local
 if [ "$#" -eq 1 ] ; then prefix=$1 ; fi
 echo "prefix=${prefix}"
 
+SYSTEM_CFLAGS=
+case $(uname) in
+	Linux )
+		SYSTEM_CFLAGS=-D_POSIX_C_SOURCE=200809L
+	;;
+	OpenBSD )
+		SYSTEM_CFLAGS=
+	;;
+esac
+echo "system: $(uname)"
+echo "SYSTEM_CFLAGS=" ${SYSTEM_CFLAGS}
+
 PKGS="expat"
 for a in ${PKGS} ; do
 	check_pkg $a
@@ -41,6 +53,7 @@ echo >>Makefile
 sed \
 	-e "s|@prefix@|${prefix}|g" \
 	-e "s|@PKGS_CFLAGS@|${PKGS_CFLAGS}|g" \
+	-e "s|@SYSTEM_CFLAGS@|${SYSTEM_CFLAGS}|g" \
 	-e "s|@PKGS_LDFLAGS@|${PKGS_LDFLAGS}|g" \
 	Makefile.in >>Makefile
 SRCS=$(sed -n '/SRCS=/,/[^ ]/p' Makefile.in | sed -e 's/SRCS=//' -e 's/\\//')
