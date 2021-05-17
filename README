@@ -1,7 +1,7 @@
-xmlq
+kvxml
 ====
 
-xmlq is a simple command-line tool for converting XML files to a simple
+kvxml is a simple command-line tool for converting XML files to a simple
 key-value format, so that XML content can be easily processed with
 standard line-based Unix text-processing tools such as grep, sed, awk.
 
@@ -24,14 +24,14 @@ Usage
 
 e.g.
 
-./xmlq -s <file.xml | grep /html/body/name
+./kvxml -s <file.xml | grep /html/body/name
 
 Example
 =======
 
-examples/slashdot.sh is a proof of concept showing xmlq can be used
+examples/slashdot.sh is a proof of concept showing kvxml can be used
 to quickly write an RSS reader by combining standard line-based
-text-processing tools. It uses curl for getting the feed, xmlq and
+text-processing tools. It uses curl for getting the feed, kvxml and
 awk for parsing it, and lynx and nroff for formatting the output.
 
 Without arguments, it gives the list of articles, formatted with nroff.
