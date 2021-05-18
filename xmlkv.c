@@ -143,7 +143,8 @@ main(int argc, char *argv[])
 	if (pledge("stdio", NULL) < 0)
 		err(1, "pledge");
 #endif
-	while ((ch = getopt(argc, argv, "psqrh")) != -1) {
+	cflags = REG_NOSUB | REG_ICASE;
+	while ((ch = getopt(argc, argv, "psqr:h")) != -1) {
 		switch (ch) {
 		case 's':
 			single = 1;
@@ -156,25 +157,27 @@ main(int argc, char *argv[])
 			break;	
 		case 'r':
 			rootmode = 1;
+			root = strdup(optarg);
+			if (regcomp(&pattern[0], root, cflags) != 0)
+				err(1, "regcomp");
+			npattern++;
 			break;
 		case 'h':
 		default:
-			fprintf(stderr, "Usage: %s [-psqr] [re ..]\n",
+			fprintf(stderr, "Usage: %s [-psq] [-r root] re ..\n",
 			    argv[0]);
 			fprintf(stderr,
-			    "\t-s\tsingle\n"
-			    "\t-q\tquiet\n"
-			    "\t-p\tpath only\n"
-			    "\t-r\troot mode\n");
+			    "\t-s\t\tsingle\n"
+			    "\t-q\t\tquiet\n"
+			    "\t-p\t\tpath only\n"
+			    "\t-r <root>\tbegin from root\n");
 			return 1;
 		}
 	}
 	argc -= optind;
 	argv += optind;
-	cflags = REG_NOSUB | REG_ICASE;
 	for (i = 0; i < argc; i++) {
-		if (i == 0) root = argv[i];
-		if (regcomp(&pattern[i], argv[i], cflags) != 0)
+		if (regcomp(&pattern[npattern], argv[i], cflags) != 0)
 			err(1, "regcomp");
 		npattern++;
 	}
@@ -187,6 +190,9 @@ main(int argc, char *argv[])
 
 	for (i = 0; i < npattern; i++)
 		regfree(&pattern[i]);
+
+	if (root != NULL)
+		free(root);
 
 	return 0;
 }
