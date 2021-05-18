@@ -1,0 +1,36 @@
+.Dd $Mdocdate: May 18 2021 $
+.Dt XMLKV 1
+.Os
+.Sh NAME
+.Nm xmlkv
+.Nd convert XML files to a simple key-value format
+.Sh SYNPSIS
+.Nm
+.Op Fl psqr
+.Op regular expression
+.Sh DESCRIPTION
+.Nm xmlkv
+is a simple command-line tool for converting XML files to a simple
+key-value format, so that XML content can be easily processed with
+standard line-based Unix text-processing tools such as grep, sed, awk.
+.Pp
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl s
+Suppress printing of newlines, so that each result is a single, potentially
+long line.
+.It Fl q
+Suppress printing of tag names.
+.It Fl r
+Print the keys so that the parent element is enclosed within [ and ] and is
+shown in a separate line.
+.It Fl p
+Print the keys (a.k.a. the paths) only.
+.El
+.Sh EXAMPLES
+Show the body of all a-tags that are under body-tags, that are under
+html-tags:
+.Pp
+.Dl $ xmlkv html/body/a <file.xml
+.Sh SEE ALSO
+.Xr jsonkv 1

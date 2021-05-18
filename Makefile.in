@@ -20,6 +20,7 @@ DISTFILES=\
 	README\
 	LICENSE
 PROG=xmlkv
+MAN=xmlkv.1
 
 OBJS=$(SRCS:.c=.o)
 
@@ -36,6 +37,7 @@ clean:
 
 install: $(PROG)
 	$(INSTALL) $(INSTALLFLAGS) $(PROG) $(DESTDIR)$(bindir)/$(PROG)
+	$(INSTALL) $(INSTALLFLAGS) $(MAN) $(DESTDIR)$(mandir)/$(MAN)
 
 uninstall:
 	rm -f $(DESTDIR)$(bindir)/$(PROG)
