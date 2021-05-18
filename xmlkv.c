@@ -184,5 +184,9 @@ main(int argc, char *argv[])
 		npattern++;
 	}
 	parse(stdin);
+
+	for (i = 0; i < npattern; i++)
+		regfree(&pattern[i]);
+
 	return 0;
 }
