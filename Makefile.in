@@ -37,7 +37,9 @@ clean:
 
 install: $(PROG)
 	$(INSTALL) $(INSTALLFLAGS) $(PROG) $(DESTDIR)$(bindir)/$(PROG)
-	$(INSTALL) $(INSTALLFLAGS) $(MAN) $(DESTDIR)$(mandir)/$(MAN)
+	$(INSTALL) $(INSTALLFLAGS) -m 444 $(MAN) \
+		$(DESTDIR)$(mandir)/man1/$(MAN)
 
 uninstall:
 	rm -f $(DESTDIR)$(bindir)/$(PROG)
+	rm -f $(DESTDIR)$(mandir)/man1/$(MAN)
